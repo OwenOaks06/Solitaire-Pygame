@@ -9,3 +9,6 @@ class Card:
         """
         self.suit = suit
         self.number = num
+
+    def printCard(self):
+        print(str(self.number) + " of " + self.suit)

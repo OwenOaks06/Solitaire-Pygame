@@ -42,3 +42,6 @@ class Deck:
                 cards += " | "
             i += 1
         print(cards)
+
+    def pickCard(self):
+        return self.cards.pop(0)
