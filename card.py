@@ -9,6 +9,9 @@ class Card:
         """
         self.suit = suit
         self.number = num
+        if self.suit == "Diamonds" or self.suit == "Hearts": self.color = "red"
+        else: self.color = "black"
+        self.faceUp = False
 
     def printCard(self):
-        print(str(self.number) + " of " + self.suit)
+        print(str(self.number) + " of " + self.suit + " " + str(self.faceUp))

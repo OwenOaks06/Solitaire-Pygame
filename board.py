@@ -13,6 +13,7 @@ class Board:
         for i in range(self.NUM_COLUMNS):
             for j in range(max):
                 self.columns[i].append(deck.pickCard())
+            self.columns[i][max-1].faceUp = True
             max += 1
 
     def printBoard(self):
@@ -22,4 +23,8 @@ class Board:
             k += 1
             for j in i:
                 j.printCard()
-
+    
+    def moveCard(self, sourceCol, targetCol):
+        sourceColumn = self.columns[sourceCol]
+        targetColumn = self.columns[targetCol]
+        
