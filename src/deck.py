@@ -1,7 +1,9 @@
 from card import Card
+from card import cardsGroup
 from random import shuffle
+from pygame.sprite import Group
 
-class Deck:
+class Deck():
     NUM_SUITS = 4
     NUM_PER_SUIT = 13
     NUM_CARDS = NUM_SUITS * NUM_PER_SUIT
@@ -11,6 +13,7 @@ class Deck:
         """Creates a new deck and stores it in the "cards" attribute
         """
         self.cards = self.createDeck()
+
     
     def createDeck(self):
         """Creates a deck of cards containing the specified suits and cards and returns it
@@ -21,7 +24,9 @@ class Deck:
         cards = []
         for suit in range(self.NUM_SUITS):
             for number in range(self.NUM_PER_SUIT):
-                cards.append(Card(self.SUITS[suit], number+1))
+                newCard = Card(self.SUITS[suit], number+1)
+                cardsGroup.add(newCard)
+                cards.append(newCard)
         return cards
 
     def shuffle(self):
@@ -44,4 +49,4 @@ class Deck:
         print(cards)
 
     def pickCard(self):
-        return self.cards.pop(0)
+        return self.cards.pop(len(self.cards)-1)
