@@ -3,10 +3,7 @@ import pygame.image
 from pygame.locals import MOUSEBUTTONDOWN
 from pygame.locals import MOUSEBUTTONUP
 from pygame.locals import MOUSEMOTION
-from pygame.sprite import Group
 import os
-
-cardsGroup = Group()
 
 class Card(pygame.sprite.Sprite):
     def __init__(self, suit, num):
@@ -44,5 +41,6 @@ class Card(pygame.sprite.Sprite):
                 self.moving = False
             elif event == MOUSEMOTION and self.moving:
                 self.rect.move_ip(event.rel)
-        
-        
+    
+    def draw(self, screen):
+        screen.blit(self.image, self.rect.center)

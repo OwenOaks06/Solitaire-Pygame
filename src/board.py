@@ -1,5 +1,4 @@
 from deck import Deck
-from card import cardsGroup
 import pygame
 import os
 
@@ -19,7 +18,7 @@ class Board:
         for i in range(self.NUM_COLUMNS):
             for j in range(max):
                 self.columns[i].append(deck.pickCard())
-                self.columns[i][j].rect.center = i * (self.WINDOW_WIDTH/8), 100 + (j*20)
+                self.columns[i][j].rect.center = (i * (self.WINDOW_WIDTH/8), 100 + (j*20))
             self.columns[i][max-1].faceUp = True
             max += 1
         self.deck = deck

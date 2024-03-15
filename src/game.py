@@ -1,6 +1,5 @@
 from deck import Deck
 from board import Board
-from card import cardsGroup
 import pygame
 from pygame.locals import QUIT
 import sys
@@ -24,19 +23,20 @@ board = Board(WINDOW_WIDTH, WINDOW_HEIGHT)
 deck = Deck()
 deck.shuffle()
 board.dealDeck(deck)
-board.printBoard()
 
 while True:
     events = pygame.event.get()
-    cardsGroup.update(events)
+    for i in board.columns:
+        for j in i:
+            j.update(events)
+            j.draw(screen)
+    
     screen.fill(BACKGROUND)
 
     for event in events:
         if event.type == QUIT:
             pygame.quit()
             sys.exit()
-
-    cardsGroup.draw(screen)
 
     clock.tick(FPS)
     pygame.display.update()

@@ -1,7 +1,5 @@
 from card import Card
-from card import cardsGroup
 from random import shuffle
-from pygame.sprite import Group
 
 class Deck():
     NUM_SUITS = 4
@@ -25,7 +23,6 @@ class Deck():
         for suit in range(self.NUM_SUITS):
             for number in range(self.NUM_PER_SUIT):
                 newCard = Card(self.SUITS[suit], number+1)
-                cardsGroup.add(newCard)
                 cards.append(newCard)
         return cards
 
