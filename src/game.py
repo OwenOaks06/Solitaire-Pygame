@@ -1,5 +1,6 @@
 from deck import Deck
 from board import Board
+from card import Card
 import pygame
 from pygame.locals import QUIT
 import sys
@@ -26,12 +27,10 @@ board.dealDeck(deck)
 
 while True:
     events = pygame.event.get()
-    for i in board.columns:
-        for j in i:
-            j.update(events)
-            j.draw(screen)
-    
     screen.fill(BACKGROUND)
+    
+    board.update(events)
+    board.draw(screen)
 
     for event in events:
         if event.type == QUIT:

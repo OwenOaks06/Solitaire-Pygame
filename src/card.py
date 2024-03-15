@@ -1,8 +1,5 @@
 import pygame.sprite
 import pygame.image
-from pygame.locals import MOUSEBUTTONDOWN
-from pygame.locals import MOUSEBUTTONUP
-from pygame.locals import MOUSEMOTION
 import os
 
 class Card(pygame.sprite.Sprite):
@@ -28,19 +25,6 @@ class Card(pygame.sprite.Sprite):
 
     def printCard(self):
         print(str(self.number) + " of " + self.suit + " " + str(self.faceUp))
-
-    def update(self, events):
-        if self.faceUp: self.image = self.img_faceUp
-        elif not self.faceUp: self.image = self.img_faceDown
-        self.rect = self.image.get_rect()
-        for event in events:
-            if event == MOUSEBUTTONDOWN:
-                if self.rect.collidepoint(event.pos):
-                    self.moving = True
-            elif event == MOUSEBUTTONUP:
-                self.moving = False
-            elif event == MOUSEMOTION and self.moving:
-                self.rect.move_ip(event.rel)
     
     def draw(self, screen):
-        screen.blit(self.image, self.rect.center)
+        screen.blit(self.image, self.rect.topleft)

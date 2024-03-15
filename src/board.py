@@ -1,4 +1,7 @@
 from deck import Deck
+from pygame.locals import MOUSEBUTTONDOWN
+from pygame.locals import MOUSEBUTTONUP
+from pygame.locals import MOUSEMOTION
 import pygame
 import os
 
@@ -18,7 +21,7 @@ class Board:
         for i in range(self.NUM_COLUMNS):
             for j in range(max):
                 self.columns[i].append(deck.pickCard())
-                self.columns[i][j].rect.center = (i * (self.WINDOW_WIDTH/8), 100 + (j*20))
+                self.columns[i][j].rect.center = (100 + i * (self.WINDOW_WIDTH/8), 100 + (j*20))
             self.columns[i][max-1].faceUp = True
             max += 1
         self.deck = deck
@@ -44,3 +47,38 @@ class Board:
                 targetColumn.append(sourceColumn.pop(sourceColumn.index(i)))
 
         return sourceCard
+    
+    def canMoveCard(self, cardToMove, column, event):
+        if not cardToMove.faceUp: return False
+        for card in column[column.index(cardToMove)::]:
+            if len(column)-1 == column.index(cardToMove): return True
+            nextCard = column[column.index(card)+1]
+            if nextCard.rect.collidepoint(event.pos): return False
+            if card.color != nextCard.color and card.number == nextCard.number+1:
+                return True
+            else:
+                return False
+
+    def update(self, events):
+        for column in self.columns:
+            for card in column:
+                if card.faceUp: card.image = card.img_faceUp
+                elif not card.faceUp: card.image = card.img_faceDown
+                for event in events:
+                    if event.type == MOUSEBUTTONDOWN:
+                        if column.index(card) != len(column):
+                            if column[column.index(card)-1].moving:
+                                card.moving = True
+                        if card.rect.collidepoint(event.pos) and self.canMoveCard(card, column, event):
+                            card.moving = True
+                    elif event.type == MOUSEBUTTONUP:
+                        card.moving = False
+                    elif event.type == MOUSEMOTION and card.moving:
+                        card.rect.move_ip(event.rel)
+    
+    def draw(self, screen):
+        for i in self.columns:
+            for j in i:
+                j.draw(screen)
+
+        
