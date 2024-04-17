@@ -16,7 +16,8 @@ class Card(pygame.sprite.Sprite):
         if self.suit == "Diamonds" or self.suit == "Hearts": self.color = "red"
         else: self.color = "black"
         self.faceUp = False
-        
+
+        self.locked = False
         self.moving = False
         self.img_faceUp = pygame.image.load(os.path.join(os.path.dirname(__file__), 'assets', 'cards', self.suit, str(self.number)+'.png')).convert_alpha()
         self.img_faceDown = pygame.image.load(os.path.join(os.path.dirname(__file__), 'assets', 'cards', 'backs', 'card_back.png')).convert_alpha()

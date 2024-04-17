@@ -5,7 +5,7 @@ class Deck():
     NUM_SUITS = 4
     NUM_PER_SUIT = 13
     NUM_CARDS = NUM_SUITS * NUM_PER_SUIT
-    SUITS = ["Diamonds", "Clubs", "Hearts", "Spades"]
+    SUITS = ["Clubs", "Hearts", "Spades", "Diamonds"]
     
     def __init__(self):
         """Creates a new deck and stores it in the "cards" attribute
